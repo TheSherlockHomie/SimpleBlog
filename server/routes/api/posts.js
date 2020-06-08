@@ -13,7 +13,14 @@ router.get("/", async (req, res) => {
 });
 
 //Add posts
-
+router.post("/", async (req, res) => {
+	const posts = await loadPostsCollection();
+	await posts.insertOne({
+		text: req.body.text,
+		createdAt: new Date(),
+	});
+	res.status(201).send();
+});
 //Delete posts
 
 async function loadPostsCollection() {
