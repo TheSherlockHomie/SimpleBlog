@@ -2,6 +2,7 @@ const express = require("express");
 const mongodb = require("mongodb");
 const apiKeys = require("./../../../apiKeys");
 
+//Handle api key stuff
 const mongoLogin = apiKeys.mongoDbLogin();
 
 const router = express.Router();
@@ -21,7 +22,13 @@ router.post("/", async (req, res) => {
 	});
 	res.status(201).send();
 });
+
 //Delete posts
+router.delete("/:id", async (req, res) => {
+	const posts = await loadPostsCollection();
+	await posts.deleteOne({ _id: mongodb.ObjectID(req.params.id) });
+	res.status(200).send();
+});
 
 async function loadPostsCollection() {
 	const client = await mongodb.MongoClient.connect(
