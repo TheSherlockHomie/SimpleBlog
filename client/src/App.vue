@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png" />
-    <PostComponent msg="Hello mic testing 1 2 3" />
+    <PostComponent />
   </div>
 </template>
 

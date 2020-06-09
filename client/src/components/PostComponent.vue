@@ -1,10 +1,23 @@
 <template></template>
 
 <script>
+import PostService from "./../PostService";
+
 export default {
-  name: "HelloWorld",
-  props: {
-    msg: String
+  name: "PostComponent",
+  data() {
+    return {
+      posts: [],
+      error: "",
+      text: ""
+    };
+  },
+  async created() {
+    try {
+      this.posts = await PostService.getPosts();
+    } catch (err) {
+      this.error = err.message;
+    }
   }
 };
 </script>
