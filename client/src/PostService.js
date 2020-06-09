@@ -30,5 +30,9 @@ class PostService {
     }
 
     //Delete Post
-
+    static deletePost(id) {
+        return axios.delete(`${url}/${id}`);
+    }
 }
+
+export default PostService;
