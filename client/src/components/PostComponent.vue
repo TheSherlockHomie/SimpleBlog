@@ -1,7 +1,13 @@
 <template>
   <div class="container">
     <h1>Latest Posts</h1>
-    <!-- TODO: Create posts here -->
+
+    <div class="create-post">
+      <label for="create-post">Create a post!</label>
+      <input type="text" id="create-post" v-model="text" placeholder="Say something..." />
+      <button v-on:click="createPost">Post</button>
+    </div>
+
     <hr />
     <p class="error" v-if="error">{{error}}</p>
     <div class="posts-container">
@@ -36,6 +42,12 @@ export default {
       this.posts = await PostService.getPosts();
     } catch (err) {
       this.error = err.message;
+    }
+  },
+  methods: {
+    async createPost() {
+      await PostService.insertPost(this.text);
+      this.posts = await PostService.getPosts();
     }
   }
 };
