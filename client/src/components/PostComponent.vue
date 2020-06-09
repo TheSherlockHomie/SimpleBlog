@@ -1,4 +1,23 @@
-<template></template>
+<template>
+  <div class="container">
+    <h1>Latest Posts</h1>
+    <!-- TODO: Create posts here -->
+    <hr />
+    <p class="error" v-if="error">{{error}}</p>
+    <div class="posts-container">
+      <div
+        class="post"
+        v-for="(post, index) in posts"
+        v-bind:item="post"
+        v-bind:index="index"
+        v-bind:key="post._id"
+      >
+        {{ `${post.createdAt.getDate()}/${post.createdAt.getMonth()}/${post.createdAt.getFullYear()} ${post.createdAt.getHours()}:${post.createdAt.getMinutes()}` }}
+        <p class="text">{{post.text}}</p>
+      </div>
+    </div>
+  </div>
+</template>
 
 <script>
 import PostService from "./../PostService";
@@ -39,7 +58,7 @@ p.error {
 div.post {
   position: relative;
   border: 1px solid green;
-  background-color: greenyellow;
+  background-color: #bcffb8;
   padding: 10px 10px 30px 10px;
   margin-bottom: 15px;
 }
