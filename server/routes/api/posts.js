@@ -1,9 +1,11 @@
 const express = require("express");
 const mongodb = require("mongodb");
-const apiKeys = require("./../../../apiKeys");
+
+if (process.env.NODE_ENV !== "production") require("dotenv").config();
 
 //Handle api key stuff
-const mongoLogin = apiKeys.mongoDbLogin();
+const mongoUName = process.env.DB_UNAME;
+const mongoPass = process.env.DB_PASS;
 
 const router = express.Router();
 
@@ -32,7 +34,7 @@ router.delete("/:id", async (req, res) => {
 
 async function loadPostsCollection() {
 	const client = await mongodb.MongoClient.connect(
-		`mongodb+srv://${mongoLogin.username}:${mongoLogin.password}@simpleblog-fgubp.mongodb.net/SimpleBlog?retryWrites=true&w=majority`,
+		`mongodb+srv://${mongoUName}:${mongoPass}@simpleblog-fgubp.mongodb.net/SimpleBlog?retryWrites=true&w=majority`,
 		{
 			useNewUrlParser: true,
 		}

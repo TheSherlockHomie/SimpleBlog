@@ -3,5 +3,4 @@
 node_modules
 
 #Hide api keys
-apiKeys.js
-
+.env
